@@ -26,7 +26,7 @@
         </div>
     </nav>
 
-    <div id="app" class="container">
+    <div id="app" class="container mt-3">
         <users-list :hello="hello"></users-list>
     </div>
 </div>
@@ -40,7 +40,7 @@
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 
 <template id="bullet-list">
-  <h1>{{hello}}</h1>
+    <h1>{{hello}}</h1>
 </template>
 
 <script type="text/babel">
@@ -48,7 +48,7 @@
     name: 'UsersListReadonly',
     template: '#bullet-list',
     props: {
-      hello: ''
+      hello: String,
     },
   }
 
