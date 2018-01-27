@@ -1,0 +1,32 @@
+[
+  {
+    "id": 0,
+    "name": "Constance Compton",
+    "email": "constancecompton@kindaloo.com"
+  },
+  {
+    "id": 1,
+    "name": "Helena Shepherd",
+    "email": "helenashepherd@kindaloo.com"
+  },
+  {
+    "id": 2,
+    "name": "Staci Hopper",
+    "email": "stacihopper@kindaloo.com"
+  },
+  {
+    "id": 3,
+    "name": "Rosales Puckett",
+    "email": "rosalespuckett@kindaloo.com"
+  },
+  {
+    "id": 4,
+    "name": "Orr Hurst",
+    "email": "orrhurst@kindaloo.com"
+  },
+  {
+    "id": 5,
+    "name": "Moon Hayden",
+    "email": "moonhayden@kindaloo.com"
+  }
+]
