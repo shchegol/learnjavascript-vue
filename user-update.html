@@ -1,101 +1,60 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-    <meta charset="UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <title>First task</title>
 </head>
-<body>
 
+<body>
 <div id="user-list">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="user-list.html">Users</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="user-list.html">List</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="user-update.html">Edit</a>
-                </li>
-            </ul>
-        </div>
+
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="user-list.html">List</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="user-update.html">Edit</a>
+            </li>
+        </ul>
     </nav>
 
     <div id="app" class="container mt-4">
-        <users-list-update></users-list-update>
-        <div @update-users="updateUserData">{{ usersList }}</div>
+        <user-edit :user="user"></user-edit>
     </div>
 </div>
-
 
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<!-- bootstrap -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-<template id="base-input">
-    <input type="text" :value="value" :placeholder="placeholder" class="form-control"/>
-</template>
-
-<template id="list-update">
+<template id="user-edit-form">
     <form>
         <div class="form-row">
             <div class="form-group col">
-                <base-input v-model="inputName" placeholder="Name"></base-input>
+                <input type="text" v-model="user.input.name.value" :placeholder="user.input.name.placeholder" class="form-control"/>
             </div>
             <div class="form-group col">
-                <base-input v-model="inputEmail" placeholder="Email"></base-input>
+                <input type="text" v-model="user.input.email.value" :placeholder="user.input.email.placeholder" class="form-control"/>
             </div>
             <div class="form-group col-auto">
-                <button @click="updateUsersList" type="button" class="btn btn-primary">Add user</button>
+                <button type="button" class="btn btn-primary">Add user</button>
             </div>
         </div>
     </form>
 </template>
 
 <script type="text/babel">
-    let Input = {
-        name: 'Input',
-        template: '#base-input',
+    let UserEdit = {
+        template: '#user-edit-form',
         props: {
-            value: {
-                type: String,
-                default: ''
-            },
-            placeholder: {
-                type: String,
-                default: ''
-            },
-        }
-    };
-
-    let UsersListUpdate = {
-        name: 'UsersListUpdate',
-        template: '#list-update',
-        components: {
-            'base-input': Input,
-        },
-        data() {
-            return {
-                inputName: '',
-                inputEmail: ''
-            }
-        },
-        methods: {
-            updateUsersList() {
-                // axios post to json
-                console.log(this)
-                this.$emit('update-users', this.inputName);
+            user: {
+                type: Object,
+                required: true
             }
         }
     };
@@ -103,17 +62,22 @@
     let app = new Vue({
         el: '#app',
         components: {
-            'users-list-update': UsersListUpdate,
+            'user-edit': UserEdit,
         },
         data() {
             return {
-                usersList: '123'
-            }
-        },
-        methods: {
-            updateUserData(name) {
-                console.log(name);
-                this.usersList = name
+                user: {
+                    input: {
+                        name: {
+                            value: '',
+                            placeholder: 'Name'
+                        },
+                        email: {
+                            value: '',
+                            placeholder: 'Email'
+                        }
+                    }
+                }
             }
         }
     })

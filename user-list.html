@@ -1,58 +1,56 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-    <meta charset="UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <title>First task</title>
-</head>
-<body>
-<style>
-    .rounded-circle {
-        width: 32px;
-        height: 32px;
-    }
 
-    .preloader {
-        height: 32px;
-        background: url('img/preloader.gif') center no-repeat;
-    }
-</style>
+    <style>
+        .number-reset {
+            counter-reset: item;
+        }
+
+        .number:after {
+            content: counter(item);
+            counter-increment: item;
+        }
+
+        .preloader {
+            height: 32px;
+            background: url('img/preloader.gif') center no-repeat;
+        }
+    </style>
+</head>
+
+<body>
 <div id="user-list">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="user-list.html">Users</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="user-list.html">List</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="user-update.html">Edit</a>
-                </li>
-            </ul>
-        </div>
+
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="user-list.html">List</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="user-update.html">Edit</a>
+            </li>
+        </ul>
     </nav>
 
     <div id="app" class="container mt-4">
         <div v-if="!haveUsers" class="preloader"></div>
-        <users-list v-else :list="list"></users-list>
+        <users-list v-else :users-list="usersList"></users-list>
     </div>
 </div>
+
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<!-- bootstrap -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 <template id="list-item">
-    <table class="table table-hover">
+    <table class="table table-hover number-reset">
         <thead>
         <tr>
             <th>#</th>
@@ -61,8 +59,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(item, index) in list" :key="item.id">
-            <td>{{index + 1}}</td>
+        <tr v-for="item in usersList" :key="item.id">
+            <td class="number"></td>
             <td>{{item.name}}</td>
             <td>{{item.email}}</td>
         </tr>
@@ -71,21 +69,12 @@
 </template>
 
 <script type="text/babel">
-    let usersList = {
-        name: 'UsersList',
+    let UsersList = {
         template: '#list-item',
         props: {
-            list: {
+            usersList: {
                 type: Array,
                 required: true
-            },
-            src: {
-                type: String,
-                default: 'https://vk.vkfaces.com/628127/v628127247/1104e/5qh-3z2opGs.jpg'
-            },
-            alt: {
-                type: String,
-                default: 'Нет фото'
             }
         }
     };
@@ -93,13 +82,11 @@
     let app = new Vue({
         el: '#app',
         components: {
-            'users-list': usersList,
+            'users-list': UsersList,
         },
         data() {
             return {
-                list: [],
-                src: '',
-                alt: ''
+                usersList: [],
             }
         },
         created() {
@@ -107,15 +94,14 @@
         },
         computed: {
             haveUsers() {
-                return this.list.length > 0
+                return this.usersList.length > 0
             }
         },
         methods: {
             fetchUserList() {
-                let self = this;
                 axios.get('users.json')
                     .then(response => {
-                        self.list = response.data;
+                        this.usersList = response.data;
                     })
             }
         },
