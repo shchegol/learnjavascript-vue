@@ -10,11 +10,12 @@
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "json-server": "json-server --watch db/main.json"
   },
   "dependencies": {
     "axios": "^0.17.1",
-    "bootstrap-vue": "^2.0.0-rc.1",
+    "bootstrap": "^4.0.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
@@ -73,6 +74,7 @@
     "shelljs": "^0.7.6",
     "sinon": "^4.0.0",
     "sinon-chai": "^2.8.0",
+    "style-loader": "^0.20.1",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
     "vue-loader": "^13.3.0",
