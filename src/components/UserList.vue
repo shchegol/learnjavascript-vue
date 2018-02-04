@@ -1,8 +1,8 @@
 <template>
-  <table class="table table-bordered table-hover number-reset">
+  <table class="table table-bordered table-hover">
     <thead>
     <tr>
-      <th>#</th>
+      <th>ID</th>
       <th>First name</th>
       <th>Last name</th>
       <th>Active</th>
@@ -15,7 +15,7 @@
     </thead>
     <tbody>
     <tr v-for="user in users" :key="user.id">
-      <td class="number"></td>
+      <td>{{user.id}}</td>
       <td>{{user.firstName}} </td>
       <td>{{user.lastName}}</td>
       <td>{{user.isActive}}</td>
@@ -41,14 +41,3 @@
     }
   }
 </script>
-
-<style scoped>
-  .number-reset {
-    counter-reset: item;
-  }
-
-  .number:after {
-    content: counter(item);
-    counter-increment: item;
-  }
-</style>

@@ -1,39 +1,25 @@
 <template>
   <nav aria-label="Page navigation example">
     <ul class="pagination m-0">
-      <li class="page-item disabled">
-        <a class="page-link" href="#" aria-label="Previous">
+      <li class="page-item"  :class="{ disabled: page === 1 }">
+        <a class="page-link" href="#" aria-label="Previous" @click.prevent="prevPage">
           <span aria-hidden="true">&laquo;</span>
           <span class="sr-only">Previous</span>
         </a>
       </li>
 
-      <li v-for="item in items" :key="user.id">
-        a
+      <li v-for="item in maxPages" :key="item" :class="{ active: page === item }" class="page-item">
+        <a @click.prevent="selectPage(item)" class="page-link">
+          {{ item }}
+        </a>
       </li>
 
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
+      <li class="page-item"  :class="{ disabled: page === maxPages }">
+        <a class="page-link" href="#" aria-label="Next"  @click.prevent="nextPage">
           <span aria-hidden="true">&raquo;</span>
           <span class="sr-only">Next</span>
         </a>
       </li>
-
-      <!--<li class="page-item disabled">-->
-      <!--<a class="page-link" href="#" aria-label="Previous">-->
-      <!--<span aria-hidden="true">&laquo;</span>-->
-      <!--<span class="sr-only">Previous</span>-->
-      <!--</a>-->
-      <!--</li>-->
-      <!--<li class="page-item active"><a class="page-link" href="#">1</a></li>-->
-      <!--<li class="page-item"><a class="page-link" href="#">2</a></li>-->
-      <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
-      <!--<li class="page-item">-->
-      <!--<a class="page-link" href="#" aria-label="Next">-->
-      <!--<span aria-hidden="true">&raquo;</span>-->
-      <!--<span class="sr-only">Next</span>-->
-      <!--</a>-->
-      <!--</li>-->
     </ul>
   </nav>
 </template>
@@ -41,23 +27,44 @@
 <script>
   export default {
     name: 'rows-per-page',
+    model: {
+      prop: 'page'
+    },
     props: {
-      value: {
+      page: {
         type: Number,
-        require: true
+        required: true
       },
       totalPage: {
         type: Number,
         require: true
+      },
+      perPage: {
+        type: Number,
+        require: true
       }
     },
-    data () {
-      return {}
+    computed: {
+      maxPages() {
+        return Math.ceil(this.totalPage / this.perPage);
+      }
     },
     methods: {
-      changed (value) {
-        this.$emit('input', value)
+      nextPage() {
+        const pageNum = this.page + 1;
+        if (pageNum <= this.maxPages) {
+          this.selectPage(pageNum);
+        }
+      },
+      prevPage() {
+        const pageNum = this.page - 1;
+        if (pageNum > 0) {
+          this.selectPage(pageNum);
+        }
+      },
+      selectPage(page) {
+        this.$emit('input', page);
       }
-    },
+    }
   }
 </script>

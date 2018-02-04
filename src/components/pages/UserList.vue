@@ -8,7 +8,7 @@
 
     <div class="row align-items-center">
       <div class="col-auto">
-        <rows-per-page v-model.number="selectedPage"></rows-per-page>
+        <rows-per-page v-model.number="usersPerPage"></rows-per-page>
       </div>
       <div class="col text-right">
         <button @click="toMainPage" class="btn btn-primary">go to main page</button>
@@ -27,9 +27,9 @@
 
     <div class="row align-items-center">
       <div class="col">
-        <list-pagination v-model.number="selectedPage" :totalPage="totalUsers" ></list-pagination>
+        <list-pagination v-show="showPagination" v-model.number="selectedPage" :per-page="usersPerPage" :totalPage="totalUsers" ></list-pagination>
       </div>
-      <div class="col text-right text-bold">
+      <div class="col text-right">
         total: {{ totalUsers }}
       </div>
     </div>
@@ -52,17 +52,28 @@
     data () {
       return {
         users: [],
-        selectedPage: 5
+        usersPerPage: 5,
+        selectedPage: 1
       }
     },
     computed: {
       filteredUsers () {
         return this.users.filter((item, index) => {
-          return index < this.selectedPage
+          const startIndex = (this.selectedPage - 1) * this.usersPerPage;
+          const finalIndex = startIndex + this.usersPerPage;
+          return startIndex <= index && index < finalIndex;
         })
       },
       totalUsers () {
         return this.users.length
+      },
+      showPagination() {
+        return this.usersPerPage <= this.totalUsers
+      }
+    },
+    watch: {
+      usersPerPage() {
+        this.selectedPage = 1;
       }
     },
     methods: {
