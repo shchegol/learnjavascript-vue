@@ -1,5 +1,5 @@
 <template>
-  <table class="table table-hover number-reset">
+  <table class="table table-bordered table-hover number-reset">
     <thead>
     <tr>
       <th>#</th>
@@ -9,7 +9,8 @@
       <th>Balance</th>
       <th>Email</th>
       <th>Phone</th>
-      <th colspan="2">Registered</th>
+      <th>Registered</th>
+      <th></th>
     </tr>
     </thead>
     <tbody>
@@ -22,8 +23,8 @@
       <td>{{user.email}}</td>
       <td>{{user.phone}}</td>
       <td>{{user.registered}}</td>
-      <td>
-        <router-link :to="`/user/${user.id}`" class="btn btn-primary">edit</router-link>
+      <td class="text-right">
+        <router-link :to="`/user/${user.id}`" class="btn btn-primary btn-sm">edit</router-link>
       </td>
     </tr>
     </tbody>
