@@ -26,8 +26,8 @@
 
     <div class="row">
       <div class="col form-group">
-        <label for="picture">Avatar</label>
-        <input type="text" v-model="user.picture" id="picture" name="picture" class="form-control">
+        <label>Avatar</label>
+        <avatar-uploader v-model="user.picture" />
       </div>
     </div>
 
@@ -88,7 +88,10 @@
 </template>
 
 <script>
+  import AvatarUploader from '@/components/AvatarUploader'
+
   export default {
+    components: {AvatarUploader},
     name: 'UserForm',
     model: {
       prop: 'user'

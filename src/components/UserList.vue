@@ -3,6 +3,7 @@
     <thead>
     <tr>
       <th>ID</th>
+      <th>Avatar</th>
       <th>First name</th>
       <th>Last name</th>
       <th>Active</th>
@@ -16,7 +17,8 @@
     <tbody>
     <tr v-for="user in users" :key="user.id">
       <td>{{user.id}}</td>
-      <td>{{user.firstName}} </td>
+      <td><img :src="user.picture" alt="" class="rounded-circle avatar"></td>
+      <td>{{user.firstName}}</td>
       <td>{{user.lastName}}</td>
       <td>{{user.isActive}}</td>
       <td>{{user.balance}}</td>
@@ -41,3 +43,10 @@
     }
   }
 </script>
+
+<style scoped>
+  .avatar {
+    width: 32px;
+    height: 32px;
+  }
+</style>
