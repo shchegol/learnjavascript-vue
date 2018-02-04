@@ -29,7 +29,7 @@
     props: {
       picture: {
         type: String,
-        required: true
+        default: "http://placehold.it/128x128"
       }
     },
     methods: {
