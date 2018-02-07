@@ -5,11 +5,11 @@
     </p>
     <div class="row">
       <div class="col-auto">
-        <input type="file" ref="image" class="hidden" @change="upload" style="visibility: hidden; position: absolute; left: -9999px" />
+        <input type="file" ref="image" @change="upload" hidden />
         <button class="btn btn-default btn-block" @click="selectNewImage">Change picture</button>
       </div>
       <div class="col">
-        <input type="text" class="form-control" v-model="picture" readonly />
+        <input type="text" class="form-control" :value="picture" readonly />
       </div>
     </div>
   </div>
