@@ -37,11 +37,11 @@
       },
       totalPage: {
         type: Number,
-        require: true
+        required: true
       },
       perPage: {
         type: Number,
-        require: true
+        required: true
       }
     },
     computed: {
