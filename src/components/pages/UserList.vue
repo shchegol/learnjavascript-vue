@@ -38,9 +38,9 @@
 
 <script>
   import axios from 'axios'
+  import RowsPerPage from '@/components/common/RowsPerPage.vue'
+  import ListPagination from '@/components/common/ListPagination.vue'
   import UserList from '@/components/UserList.vue'
-  import RowsPerPage from '@/components/RowsPerPage.vue'
-  import ListPagination from '@/components/ListPagination.vue'
 
   export default {
     name: 'UserPage',

@@ -19,8 +19,8 @@
       </div>
 
       <div class="col form-group">
-        <label for="age">Age</label>
-        <input type="text" v-model="user.age" id="age" name="age" class="form-control">
+        <label for="age">Date of Birth</label>
+        <datepicker v-model="user.age" id="age" class="form-control"></datepicker>
       </div>
     </div>
 
@@ -88,10 +88,14 @@
 </template>
 
 <script>
-  import AvatarUploader from '@/components/AvatarUploader'
+  import AvatarUploader from '@/components/common/AvatarUploader'
+  import Datepicker from '@/components/common/Datepicker'
 
   export default {
-    components: {AvatarUploader},
+    components: {
+      AvatarUploader,
+      Datepicker
+    },
     name: 'UserForm',
     model: {
       prop: 'user'
