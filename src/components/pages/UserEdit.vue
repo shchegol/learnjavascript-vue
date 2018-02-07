@@ -2,7 +2,7 @@
   <div>
     <div class="row">
       <div class="col">
-        <h1>User edit</h1>
+        <h1>{{ user.firstName }} {{ user.lastName }}</h1>
       </div>
     </div>
 

@@ -81,20 +81,18 @@
     <div class="row">
       <div class="col form-group">
         <label for="about">About</label>
-        <textarea v-model="user.about" id="about" name="about" class="form-control"></textarea>
+        <TextEditor v-model="user.about" id="about" name="about" class="form-control"></TextEditor>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import AvatarUploader from '@/components/common/AvatarUploader'
-  import Datepicker from '@/components/common/Datepicker'
-
   export default {
     components: {
-      AvatarUploader,
-      Datepicker
+      AvatarUploader: () => import('@/components/common/AvatarUploader.vue'),
+      Datepicker: () => import('@/components/common/Datepicker.vue'),
+      TextEditor: () => import('@/components/common/TextEditor.vue'),
     },
     name: 'UserForm',
     model: {
